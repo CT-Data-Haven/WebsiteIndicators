@@ -27,5 +27,6 @@ CTtotalpovdf<-data.frame(TotalPoverty=estimate(CTtotalpov), ME90=1.645*standard.
 CTtotalpovdf[,c(2:3)]<-CTtotalpovdf[,c(1:2)]
 CTtotalpovdf[,1]<-rownames(CTtotalpovdf)
 colnames(CTtotalpovdf)<-c("Town", "Total Population below Poverty Level", "90% MoE")
+CTtotalpovdf[,3]=CTtotalpovdf[,3]=round(CTtotalpovdf[,3],0)
 
 write.csv(CTtotalpovdf, "2013_CT_towns_Total_Population_Poverty.csv", row.names=F)

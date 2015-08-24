@@ -29,6 +29,8 @@ CTpctpovdf<-data.frame(PctPoverty=estimate(CTpctpov), ME90=1.645*standard.error(
 CTpctpovdf[,c(2:3)]<-CTpctpovdf[,c(1:2)]
 CTpctpovdf[,1]<-rownames(CTpctpovdf)
 colnames(CTpctpovdf)<-c("Town", "Percent Population below Poverty Level", "90% MoE")
+CTpctpovdf[,2]=CTpctpovdf[,2]=round(CTpctpovdf[,2],3)
+CTpctpovdf[,3]=CTpctpovdf[,3]=round(CTpctpovdf[,3],3)
 
 
 write.csv(CTpctpovdf, "2013_CT_towns_Pct_Population_Poverty.csv", row.names=F)

@@ -25,11 +25,13 @@ CTchildlowinc=apply(X=CTtotalchildlowinc[,c(3:10,16:23,29:36)], FUN=sum, MARGIN=
 CTchild=apply(X=CTtotalchildlowinc[,c(2,15,28)], FUN=sum, MARGIN=2, agg.term="Totalchild")
 CTpctchildlowinc=divide.acs(numerator=CTchildlowinc, denominator=CTchild, method="proportion")
 
-CTpctchildlowincfull<-rbind(CTpctchildlowinc, pctchildlowinc)
+CTpctchildlowinc<-rbind(CTpctchildlowinc, pctchildlowinc)
 
-CTpctchildlowinc<-data.frame(Totalchildlowinc=estimate(CTpctchildlowincfull), ME90=1.645*standard.error(CTpctchildlowincfull))
-CTpctchildlowinc[,c(2:3)]<-CTpctchildlowinc[,c(1:2)]
-CTpctchildlowinc[,1]<-rownames(CTpctchildlowinc)
-colnames(CTpctchildlowinc)<-c("Town", "Pct Population Under 18 below 200% FPL", "90% MoE")
+CTpctchildlowincdf<-data.frame(Totalchildlowinc=estimate(CTpctchildlowinc), ME90=1.645*standard.error(CTpctchildlowinc))
+CTpctchildlowincdf[,c(2:3)]<-CTpctchildlowincdf[,c(1:2)]
+CTpctchildlowincdf[,1]<-rownames(CTpctchildlowincdf)
+colnames(CTpctchildlowincdf)<-c("Town", "Pct Population Under 18 below 200% FPL", "90% MoE")
+CTpctchildlowincdf[,2]=CTpctchildlowincdf[,2]=round(CTpctchildlowincdf[,2],3)
+CTpctchildlowincdf[,3]=CTpctchildlowincdf[,3]=round(CTpctchildlowincdf[,3],3)
 
-write.csv(CTpctchildlowinc, "2013_CT_towns_Pct_Child_Population_LowInc.csv", row.names=F)
+write.csv(CTpctchildlowincdf, "2013_CT_towns_Pct_Child_Population_LowInc.csv", row.names=F)

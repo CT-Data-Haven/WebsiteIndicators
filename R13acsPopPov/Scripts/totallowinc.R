@@ -21,11 +21,12 @@ lowinc1=apply(X=totallowinc[,c(2:7)], FUN=sum, MARGIN=2, agg.term="TotalLowInc")
 CTtotallowinc<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="C17002", col.names="pretty")
 CTlowinc1=apply(X=CTtotallowinc[,c(2:7)], FUN=sum, MARGIN=2, agg.term="TotalLowInc")
 
-CTtotallowincfull<-rbind(CTlowinc1, lowinc1)
+CTtotallowinc<-rbind(CTlowinc1, lowinc1)
 
-CTtotallowinc<-data.frame(CTtotallowinc=estimate(CTtotallowincfull), ME90=1.645*standard.error(CTtotallowincfull))
-CTtotallowinc[,c(2:3)]<-CTtotallowinc[,c(1:2)]
-CTtotallowinc[,1]<-rownames(CTtotallowinc)
-colnames(CTtotallowinc)<-c("Town", "Total Population below 200% FPL", "90% MoE")
+CTtotallowincdf<-data.frame(CTtotallowinc=estimate(CTtotallowinc), ME90=1.645*standard.error(CTtotallowinc))
+CTtotallowincdf[,c(2:3)]<-CTtotallowincdf[,c(1:2)]
+CTtotallowincdf[,1]<-rownames(CTtotallowincdf)
+colnames(CTtotallowincdf)<-c("Town", "Total Population below 200% FPL", "90% MoE")
+CTtotallowincdf[,3]=CTtotallowincdf[,3]=round(CTtotallowincdf[,3],0)
 
-write.csv(CTtotallowinc, "2013_CT_Total_Population_LowInc.csv", row.names=F)
+write.csv(CTtotallowincdf, "2013_CT_Total_Population_LowInc.csv", row.names=F)

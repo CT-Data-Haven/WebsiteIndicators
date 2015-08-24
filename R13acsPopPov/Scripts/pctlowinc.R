@@ -23,11 +23,13 @@ CTtotallowinc<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="C17
 CTlowinc1=apply(X=CTtotallowinc[,c(2:7)], FUN=sum, MARGIN=2, agg.term="TotalLowInc")
 CTpctlowinc=divide.acs(numerator=CTlowinc1, denominator=CTtotallowinc[,1], method="proportion")
 
-CTpctlowincfull<-rbind(CTpctlowinc, pctlowinc)
+CTpctlowinc<-rbind(CTpctlowinc, pctlowinc)
 
-CTpctlowinc<-data.frame(CTpctlowinc=estimate(CTpctlowincfull), ME90=1.645*standard.error(CTpctlowincfull))
-CTpctlowinc[,c(2:3)]<-CTpctlowinc[,c(1:2)]
-CTpctlowinc[,1]<-rownames(CTpctlowinc)
-colnames(CTpctlowinc)<-c("Town", "Pct Population below 200% FPL", "90% MoE")
+CTpctlowincdf<-data.frame(CTpctlowinc=estimate(CTpctlowinc), ME90=1.645*standard.error(CTpctlowinc))
+CTpctlowincdf[,c(2:3)]<-CTpctlowincdf[,c(1:2)]
+CTpctlowincdf[,1]<-rownames(CTpctlowincdf)
+colnames(CTpctlowincdf)<-c("Town", "Pct Population below 200% FPL", "90% MoE")
+CTpctlowincdf[,2]=CTpctlowincdf[,2]=round(CTpctlowincdf[,2],3)
+CTpctlowincdf[,3]=CTpctlowincdf[,3]=round(CTpctlowincdf[,3],3)
 
-write.csv(CTpctlowinc, "2013_CT_towns_Pct_Population_LowInc.csv", row.names=F)
+write.csv(CTpctlowincdf, "2013_CT_towns_Pct_Population_LowInc.csv", row.names=F)

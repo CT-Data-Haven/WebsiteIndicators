@@ -29,5 +29,7 @@ CTpct1to2xpovdf<-data.frame(Pct1to2xpov=estimate(CTpct1to2xpov), ME90=1.645*stan
 CTpct1to2xpovdf[,c(2:3)]<-CTpct1to2xpovdf[,c(1:2)]
 CTpct1to2xpovdf[,1]<-rownames(CTpct1to2xpovdf)
 colnames(CTpct1to2xpovdf)<-c("Town", "Pct Population 1-2x FPL Level", "90% MoE")
+CTpct1to2xpovdf[,2]=CTpct1to2xpovdf[,2]=round(CTpct1to2xpovdf[,2],3)
+CTpct1to2xpovdf[,3]=CTpct1to2xpovdf[,3]=round(CTpct1to2xpovdf[,3],3)
 
 write.csv(CTpct1to2xpovdf, "2013_CT_towns_Pct_Population_1to2xpov.csv", row.names=F)

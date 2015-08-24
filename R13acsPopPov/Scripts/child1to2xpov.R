@@ -27,5 +27,6 @@ CTtotalchild1to2xpovdf<-data.frame(Totalchild1to2xpov=estimate(CTtotalchild1to2x
 CTtotalchild1to2xpovdf[,c(2:3)]<-CTtotalchild1to2xpovdf[,c(1:2)]
 CTtotalchild1to2xpovdf[,1]<-rownames(CTtotalchild1to2xpovdf)
 colnames(CTtotalchild1to2xpovdf)<-c("Town", "Total Population Under 18 100-200% FPL", "90% MoE")
+CTtotalchild1to2xpovdf[,3]=CTtotalchild1to2xpovdf[,3]=round(CTtotalchild1to2xpovdf[,3],0)
 
 write.csv(CTtotalchild1to2xpovdf, "2013_CT_towns_Total_Child_Population_1to2FPL.csv", row.names=F)

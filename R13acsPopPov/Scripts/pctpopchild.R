@@ -25,10 +25,13 @@ CTpctchild=divide.acs(numerator=CTchild, denominator=CTtotalchild[,1], method="p
 
 CTpctchild<-rbind(CTpctchild,townpctchild)
 
-CTtotalchilddf<-data.frame(Totalchild=estimate(CTtotalchild), ME90=1.645*standard.error(CTtotalchild))
-CTtotalchilddf[,c(2:3)]<-CTtotalchilddf[,c(1:2)]
-CTtotalchilddf[,1]<-rownames(CTtotalchilddf)
-colnames(CTtotalchilddf)<-c("Town", "Total Population Under 18", "90% MoE")
-CTtotalchilddf[,3]=CTtotalchilddf[,3]=round(CTtotalchilddf[,3],0)
+CTpctchilddf<-data.frame(CTpctchild=estimate(CTpctchild), ME90=1.645*standard.error(CTpctchild))
+CTpctchilddf[,c(2:3)]<-CTpctchilddf[,c(1:2)]
+CTpctchilddf[,1]<-rownames(CTpctchilddf)
+colnames(CTpctchilddf)<-c("Town", "Pct Population Under 18", "90% MoE")
+CTpctchilddf[,2]=CTpctchilddf[,2]=round(CTpctchilddf[,2],3)
+CTpctchilddf[,3]=CTpctchilddf[,3]=round(CTpctchilddf[,3],3)
 
-write.csv(CTtotalchilddf, "2013_CT_towns_Total_Child_Population.csv", row.names=F)
+
+
+write.csv(CTpctchilddf, "2013_CT_towns_Pct_Population_Child.csv", row.names=F)

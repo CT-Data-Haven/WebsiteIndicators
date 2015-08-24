@@ -31,5 +31,7 @@ CTpctchildpovdf<-data.frame(Totalchildpoverty=estimate(CTpctchildpov), ME90=1.64
 CTpctchildpovdf[,c(2:3)]<-CTpctchildpovdf[,c(1:2)]
 CTpctchildpovdf[,1]<-rownames(CTpctchildpovdf)
 colnames(CTpctchildpovdf)<-c("Town", "Pct Population Under 18 below poverty Level", "90% MoE")
+CTpctchildpovdf[,2]=CTpctchildpovdf[,2]=round(CTpctchildpovdf[,2],3)
+CTpctchildpovdf[,3]=CTpctchildpovdf[,3]=round(CTpctchildpovdf[,3],3)
 
 write.csv(CTpctchildpovdf, "2013_CT_towns_pct_Child_Population_inPoverty.csv", row.names=F)

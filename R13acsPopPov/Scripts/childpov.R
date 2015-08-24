@@ -27,5 +27,6 @@ CTtotalchildpovdf<-data.frame(Totalchildpoverty=estimate(CTtotalchildpov), ME90=
 CTtotalchildpovdf[,c(2:3)]<-CTtotalchildpovdf[,c(1:2)]
 CTtotalchildpovdf[,1]<-rownames(CTtotalchildpovdf)
 colnames(CTtotalchildpovdf)<-c("Town", "Total Population Under 18 in poverty", "90% MoE")
+CTtotalchildpovdf[,3]=CTtotalchildpovdf[,3]=round(CTtotalchildpovdf[,3],0)
 
 write.csv(CTtotalchildpovdf, "2013_CT_towns_Total_Child_Population_inPoverty.csv", row.names=F)
