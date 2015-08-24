@@ -21,9 +21,8 @@ townpctchild=divide.acs(numerator=towntotalchild, denominator=totalchild[,1], me
 # Fetch CT state data and calculate total childpoverty
 CTtotalchild<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="B01001", col.names="pretty")
 CTchild<-apply(X=CTtotalchild[,c(3:6,27:30)], FUN=sum, MARGIN=2, agg.term="Totalchildren")
-CTpctchild=divide.acs(numerator=CTchild, denominator=CTtotalchild[,1], method="proportion")
 
-CTpctchild<-rbind(CTpctchild,townpctchild)
+CTtotalchild<-rbind(CTchild,towntotalchild)
 
 CTtotalchilddf<-data.frame(Totalchild=estimate(CTtotalchild), ME90=1.645*standard.error(CTtotalchild))
 CTtotalchilddf[,c(2:3)]<-CTtotalchilddf[,c(1:2)]
