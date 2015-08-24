@@ -2,8 +2,6 @@ library(acs)
 library(stringr)
 api.key.install(key="61a6ec2a084f67119446589d66b12b702106746b")
 
-# TOTAL POPULATION DF
-
 # fetch ACS data
 # table name full = acs.fetch(endyear, 5, geography=geomake(state=9,county="*",county.subdivision="*"), table.number="XXX", col.names="pretty")
 totalpopfull<-acs.fetch(2013, 5, geography=geo.make(state=9,county="*",county.subdivision="*"), table.number="B01003", col.names="pretty")
@@ -18,12 +16,10 @@ totalpop<-totalpopfull[c(2:79,81:95,97:123,125:173),]
 
 CTtotalpop<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="B01003", col.names="pretty")
 
-CTtotalpop<-rbind(CTtotalpop, totalpop)
+CTtotalpopA<-rbind(CTtotalpop, totalpop)
 
 
-
-
-# TOTAL POVERTY DF
+# TOTAL POVERTY
 
 # fetch ACS data
 # table name full = acs.fetch(endyear, 5, geography=geomake(state=9,county="*",county.subdivision="*"), table.number="XXX", col.names="pretty")
@@ -44,7 +40,7 @@ poverty1=apply(X=totalpoverty[,c(2:3)], FUN=sum, MARGIN=2, agg.term="TotalPovert
 CTtotalpov<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="C17002", col.names="pretty")
 CTpoverty1=apply(X=CTtotalpov[,c(2:3)], FUN=sum, MARGIN=2, agg.term="TotalPoverty")
 
-CTtotalpov<-rbind(CTpoverty1, poverty1)
+CTtotalpovA<-rbind(CTpoverty1, poverty1)
 
 
 
@@ -73,7 +69,7 @@ CTtotalpov<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="C17002
 CTpoverty1=apply(X=CTtotalpov[,c(2:3)], FUN=sum, MARGIN=2, agg.term="TotalPoverty")
 CTpctpoverty=divide.acs(numerator=CTpoverty1, denominator=CTtotalpov[,1], method="proportion")
 
-CTpctpov<-rbind(CTpctpoverty, pctpoverty)
+CTpctpovA<-rbind(CTpctpoverty, pctpoverty)
 
 
 
@@ -99,7 +95,7 @@ town2xpov1=apply(X=total2xpov[,c(4:7)], FUN=sum, MARGIN=2, agg.term="Total2xpov"
 CTtotal2xpov<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="C17002", col.names="pretty")
 CT2xpov1=apply(X=CTtotal2xpov[,c(4:7)], FUN=sum, MARGIN=2, agg.term="Total2xpov")
 
-CTtotal1to2xpov<-rbind(CT2xpov1, town2xpov1)
+CTtotal1to2xpovA<-rbind(CT2xpov1, town2xpov1)
 
 
 
@@ -127,7 +123,7 @@ CTtotal2xpov<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="C170
 CT1to2xpov=apply(X=CTtotal2xpov[,c(4:7)], FUN=sum, MARGIN=2, agg.term="Total1to2xpov")
 CTpct1to2xpov=divide.acs(numerator=CT1to2xpov, denominator=CTtotal2xpov[,1], method="proportion")
 
-CTpct1to2xpov<-rbind(CTpct1to2xpov, pct1to2xpov)
+CTpct1to2xpovA<-rbind(CTpct1to2xpov, pct1to2xpov)
 
 
 
@@ -153,10 +149,8 @@ townpctchild=divide.acs(numerator=towntotalchild, denominator=totalchild[,1], me
 # Fetch CT state data and calculate total childpoverty
 CTtotalchild<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="B01001", col.names="pretty")
 CTchild<-apply(X=CTtotalchild[,c(3:6,27:30)], FUN=sum, MARGIN=2, agg.term="Totalchildren")
-CTpctchild=divide.acs(numerator=CTchild, denominator=CTtotalchild[,1], method="proportion")
 
-CTtotalchild<-rbind(CTchild, towntotalchild)
-CTpctchild<-rbind(CTpctchild,townpctchild)
+CTtotalchildA<-rbind(CTchild,towntotalchild)
 
 
 
@@ -164,7 +158,7 @@ CTpctchild<-rbind(CTpctchild,townpctchild)
 
 # CHILD POPULATION IN POVERTY
 
-fetch ACS data
+# fetch ACS data
 # table name full = acs.fetch(endyear, 5, geography=geomake(state=9,county="*",county.subdivision="*"), table.number="XXX", col.names="pretty")
 totalchildpovertyfull<-acs.fetch(2013, 5, geography=geo.make(state=9,county="*",county.subdivision="*"), table.number="B17024", col.names="pretty")
 
@@ -183,7 +177,7 @@ townchildpoverty=apply(X=totalchildpoverty[,c(3:5,16:18,29:31)], FUN=sum, MARGIN
 CTtotalchildpoverty<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="B17024", col.names="pretty")
 CTchildpoverty=apply(X=CTtotalchildpoverty[,c(3:5,16:18,29:31)], FUN=sum, MARGIN=2, agg.term="Totalchildpoverty")
 
-CTtotalchildpov<-rbind(CTchildpoverty, townchildpoverty)
+CTtotalchildpovA<-rbind(CTchildpoverty, townchildpoverty)
 
 
 
@@ -213,7 +207,7 @@ CTchild=apply(X=CTtotalchildpoverty[,c(2,15,28)], FUN=sum, MARGIN=2, agg.term="T
 CTchildpoverty=apply(X=CTtotalchildpoverty[,c(3:5,16:18,29:31)], FUN=sum, MARGIN=2, agg.term="Totalchildpoverty")
 CTpctchildpoverty=divide.acs(numerator=CTchildpoverty, denominator=CTchild, method="proportion")
 
-CTpctchildpov<-rbind(CTpctchildpoverty, pctchildpoverty)
+CTpctchildpovA<-rbind(CTpctchildpoverty, pctchildpoverty)
 
 
 
@@ -240,7 +234,7 @@ townchild1to2xpov=apply(X=totalchild1to2xpov[,c(6:10,19:23,32:36)], FUN=sum, MAR
 CTtotalchild1to2xpov<-acs.fetch(2013, 5, geography=geo.make(state=9), table.number="B17024", col.names="pretty")
 CTchild1to2xpov=apply(X=CTtotalchild1to2xpov[,c(6:10,19:23,32:36)], FUN=sum, MARGIN=2, agg.term="Totalchild1to2xpov")
 
-CTtotalchild1to2xpov<-rbind(CTchild1to2xpov, townchild1to2xpov)
+CTtotalchild1to2xpovA<-rbind(CTchild1to2xpov, townchild1to2xpov)
 
 
 
@@ -248,6 +242,7 @@ CTtotalchild1to2xpov<-rbind(CTchild1to2xpov, townchild1to2xpov)
 
 # CHILD POPULATION PCT LOW INCOME NOT POVERTY
 
+# fetch ACS data
 # table name full = acs.fetch(endyear, 5, geography=geomake(state=9,county="*",county.subdivision="*"), table.number="XXX", col.names="pretty")
 totalchild1to2xpovfull<-acs.fetch(2013, 5, geography=geo.make(state=9,county="*",county.subdivision="*"), table.number="B17024", col.names="pretty")
 
@@ -270,12 +265,48 @@ CTchild1to2xpov=apply(X=CTtotalchild1to2xpov[,c(6:10,19:23,32:36)], FUN=sum, MAR
 CTchild=apply(X=CTtotalchild1to2xpov[,c(2,15,28)], FUN=sum, MARGIN=2, agg.term="Totalchild")
 CTpctchild1to2xpov=divide.acs(numerator=CTchild1to2xpov, denominator=CTchild, method="proportion")
 
-CTpctchild1to2xpov<-rbind(CTpctchild1to2xpov, pctchild1to2xpov)
+CTpctchild1to2xpovA<-rbind(CTpctchild1to2xpov, pctchild1to2xpov)
 
 
 # Merge Data Frames !!!
 
-allA <- cbind.acs(CTtotalpov, CTpctpov)
-allB <- cbind.acs(CTtotal1to2xpov, CTpct1to2xpov)
-allC <- cbind.acs(CTtotalchildpov, CTpctchildpov)
-allD <- cbind.acs(CTtotalchild1to2xpov, CTpctchild1to2xpov)
+allA <- CTtotalpopA
+allB <- cbind.acs(CTtotalpovA, CTpctpovA)
+allC <- cbind.acs(CTtotal1to2xpovA, CTpct1to2xpovA)
+allD <- CTtotalchildA
+allE <- cbind.acs(CTtotalchildpovA, CTpctchildpovA)
+allF <- cbind.acs(CTtotalchild1to2xpovA, CTpctchild1to2xpovA)
+
+allA1 <- cbind.acs(allA, allB)
+allB1 <- cbind.acs(allC, allD)
+allC1 <- cbind.acs(allE, allF)
+
+allA2 <- cbind.acs(allA1, allB1)
+
+# All data combined
+allA3 <-cbind.acs(allA2,allC1)
+
+# Separate Estimates and Margins of Error
+CTPopandPovdf<-data.frame(estimate(allA3[,1]), 1.645*standard.error(allA3[,1]), estimate(allA3[,2]), 1.645*standard.error(allA3[,2]), estimate(allA3[,3]), 1.645*standard.error(allA3[,3]), estimate(allA3[,4]), 1.645*standard.error(allA3[,4]), estimate(allA3[,5]), 1.645*standard.error(allA3[,5]), estimate(allA3[,6]), 1.645*standard.error(allA3[,6]), estimate(allA3[,7]), 1.645*standard.error(allA3[,7]), estimate(allA3[,8]), 1.645*standard.error(allA3[,8]), estimate(allA3[,9]), 1.645*standard.error(allA3[,9]), estimate(allA3[,10]), 1.645*standard.error(allA3[,10]))
+CTPopandPovdf[,c(2:21)]<-CTPopandPovdf[,c(1:20)]
+CTPopandPovdf[,1]<-rownames(CTPopandPovdf)
+colnames(CTPopandPovdf)<-c("Town", "Total Population", "Total Population 90% MoE", "Total Population in Poverty", "Total Population in Poverty 90% MOE", "Pct Population in Poverty", "Pct Population in Poverty 90% MOE", "Total Population Income 1-2x Poverty", "Total Population Income 1-2x Poverty 90% MOE", "Pct Population Income 1-2x Poverty", "Pct Population Income 1-2x Poverty 90% MOE", "Total Population Under 18", "Total Population Under 18 90% MOE", "Total Children in Poverty", "Total Children in Poverty 90% MOE", "Pct Children in Poverty", "Pct Children in Poverty 90% MOE", "Total Children Income 1-2x Poverty", "Total Children Income 1-2x Poverty 90% MOE", "Pct Children Income 1-2x Poverty", "Pct Children Income 1-2x Poverty 90% MOE")
+
+# Round Estimates
+CTPopandPovdf[,5]=CTPopandPovdf[,5]=round(CTPopandPovdf[,5],0)
+CTPopandPovdf[,9]=CTPopandPovdf[,9]=round(CTPopandPovdf[,9],0)
+CTPopandPovdf[,13]=CTPopandPovdf[,13]=round(CTPopandPovdf[,13],0)
+CTPopandPovdf[,15]=CTPopandPovdf[,15]=round(CTPopandPovdf[,15],0)
+CTPopandPovdf[,19]=CTPopandPovdf[,19]=round(CTPopandPovdf[,19],0)
+
+# Round MOEs
+CTPopandPovdf[,6]=CTPopandPovdf[,6]=round(CTPopandPovdf[,6],3)
+CTPopandPovdf[,7]=CTPopandPovdf[,7]=round(CTPopandPovdf[,7],3)
+CTPopandPovdf[,10]=CTPopandPovdf[,10]=round(CTPopandPovdf[,10],3)
+CTPopandPovdf[,11]=CTPopandPovdf[,11]=round(CTPopandPovdf[,11],3)
+CTPopandPovdf[,16]=CTPopandPovdf[,16]=round(CTPopandPovdf[,16],3)
+CTPopandPovdf[,17]=CTPopandPovdf[,17]=round(CTPopandPovdf[,17],3)
+CTPopandPovdf[,20]=CTPopandPovdf[,20]=round(CTPopandPovdf[,20],3)
+CTPopandPovdf[,21]=CTPopandPovdf[,21]=round(CTPopandPovdf[,21],3)
+
+
