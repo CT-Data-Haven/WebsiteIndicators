@@ -550,16 +550,16 @@ townprofiledf[,87]=paste(round(townprofiledf[,87]*100,1), "%", sep="")
 townprofiledf$Source[1] <- "All data from the US Census Bureau ACS 5-year estimate. The ACS surveys a sample of households on a rolling monthly basis; survey data are aggregated and averaged into 1, 3, and 5-year period estimates. The Census Bureau considers the 5-year estimates to be the most accurate and recommends using 5-year estimates for town-level data."
 townprofiledf$Year[1] <- "2013 5-year"
 townprofiledf$Definition[1] <- "MoE is the Margin of Error for each estimate with a 90% confidence interval. Due to sampling methodology, margins of error exist for all reported Census estimates. With 90 percent confidence, each estimate falls between a lower limit (subtracting margin of error from estimate) and an upper limit (adding margin of error to estimate).  
-"Hispanic Population" includes all persons who identify as of Hispanic or Latino ethnicity. "White Non-Hispanic Population" includes all persons who identify as of white or Caucasian race, and not of Hispanic or Latino ethnicity. "Black Non-Hispanic Population" includes all persons who identify as of black or African American race, and not of Hispanic or Latino ethnicity. "Other Race Non-Hispanic Population" includes all persons who identify as another race, and not of Hispanic or Latino ethnicity. 
-"Foreign-born Population" includes all residents born outside of the United States to non-American parents. An immigrant is another term for a foreign-born person.
-"Total Households" is equivalent to the number of occupied housing units in a given geographic area. The Census sometimes reports households as "occupied housing units."
-"Owner-occupied households" includes all households that own their housing unit.
-"Homeownership Rate" is owner-occupied households divided by total households.
-"Total Population, Poverty Status Determined" is the total population, excluding persons living in prisons, nursing homes, college dormitories, military barracks, foster children under 15 years, and people in non-conventional housing. 
-"Population in Poverty" includes any persons whose annual household income is below the poverty threshold. The federal government determines the poverty threshold based on the size of the family and the ages of its members.
-"Poverty Rate" is the population in poverty divided by the total population whose poverty status is determined.
-"Population Low-Income" counts all whose annual household income is less than 200 percent of the poverty threshold, including the population in poverty.
-"Low-Income Rate" is the low-income population divided by the total population whose poverty status is determined."
+'Hispanic Population' includes all persons who identify as of Hispanic or Latino ethnicity. 'White Non-Hispanic Population' includes all persons who identify as of white or Caucasian race, and not of Hispanic or Latino ethnicity. 'Black Non-Hispanic Population' includes all persons who identify as of black or African American race, and not of Hispanic or Latino ethnicity. 'Other Race Non-Hispanic Population' includes all persons who identify as another race, and not of Hispanic or Latino ethnicity. 
+'Foreign-born Population' includes all residents born outside of the United States to non-American parents. An immigrant is another term for a foreign-born person.
+'Total Households' is equivalent to the number of occupied housing units in a given geographic area. The Census sometimes reports households as 'occupied housing units.'
+'Owner-occupied households' includes all households that own their housing unit.
+'Homeownership Rate' is owner-occupied households divided by total households.
+'Total Population, Poverty Status Determined' is the total population, excluding persons living in prisons, nursing homes, college dormitories, military barracks, foster children under 15 years, and people in non-conventional housing. 
+'Population in Poverty' includes any persons whose annual household income is below the poverty threshold. The federal government determines the poverty threshold based on the size of the family and the ages of its members.
+'Poverty Rate' is the population in poverty divided by the total population whose poverty status is determined.
+'Population Low-Income' counts all whose annual household income is less than 200 percent of the poverty threshold, including the population in poverty.
+'Low-Income Rate' is the low-income population divided by the total population whose poverty status is determined."
 townprofiledf$"Key Facts" <- "Key Facts"
 townprofiledf$"Population" <- "Population"
 townprofiledf$"Race and Ethnicity, Total Population" <- "Race and Ethnicity, Total Population"
@@ -571,6 +571,7 @@ townprofiledf$"Poverty and Low-Income, Total Population" <- "Poverty and Low-Inc
 townprofiledf$"Poverty and Low-Income, Population 0 to 17 years" <- "Poverty and Low-Income, Population 0 to 17 years"
 townprofiledf$"Poverty and Low-Income, Population 65 years and over" <- "Poverty and Low-Income, Population 65 years and over"
 townprofiledf$"Other Data Sources" <- "Other Data Sources"
+townprofiledf$"Metadata" <- "Metadata"
 
 
 censuslink <- read.csv("TownProfilesCensus.csv", header=TRUE, nrows=170, stringsAsFactors = FALSE)
@@ -578,9 +579,9 @@ censuslink <- read.csv("TownProfilesCensus.csv", header=TRUE, nrows=170, strings
 profile <- merge(townprofiledf, censuslink)
 profile <- profile[c(31,1:30,32:170),]
 
-names(profile)[102:105] <- c("Social Characteristics", "Economic Characteristics", "Housing Characteristics", "Demographic Characteristics")
+names(profile)[103:106] <- c("Social Characteristics", "Economic Characteristics", "Housing Characteristics", "Demographic Characteristics")
 
-profiledf <- profile[,c(1,91,92,2:19,93,20:35,94,36:39,95,40:45,96,46:55,97,56:57,98,58:67,99,68:77,100,78:90,101:105)]
+profiledf <- profile[,c(1,91,92,2:19,93,20:35,94,36:39,95,40:45,96,46:55,97,56:57,98,58:67,99,68:77,100,78:87,102,88:90,101,103:106)]
 
 
 write.csv(profiledf, "5year2013_town_profile.csv", row.names=F)
