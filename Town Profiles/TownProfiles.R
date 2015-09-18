@@ -581,7 +581,7 @@ profile <- profile[c(31,1:30,32:170),]
 
 names(profile)[103:106] <- c("Social Characteristics", "Economic Characteristics", "Housing Characteristics", "Demographic Characteristics")
 
-profiledf <- profile[,c(1,91,92,2:19,93,20:35,94,36:39,95,40:45,96,46:55,97,56:57,98,58:67,99,68:77,100,78:87,102,88:90,101,103:106)]
+profiledf <- profile[,c(1,91,92,2:11,16:19,93,20:35,94,36:39,95,40:45,96,46:55,97,56:57,98,58:67,99,68:77,100,78:87,102,88:90,101,103:106)]
 
 
 write.csv(profiledf, "5year2013_town_profile.csv", row.names=F)
