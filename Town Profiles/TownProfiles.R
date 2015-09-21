@@ -561,7 +561,7 @@ townprofiledf$Definition[1] <- "MoE is the Margin of Error for each estimate wit
 'Population Low-Income' counts all whose annual household income is less than 200 percent of the poverty threshold, including the population in poverty.
 'Low-Income Rate' is the low-income population divided by the total population whose poverty status is determined."
 townprofiledf$"Key Facts" <- "Key Facts"
-townprofiledf$"Population" <- "Population"
+townprofiledf$"Demographic, Total Population" <- "Demographic, Total Population"
 townprofiledf$"Race and Ethnicity, Total Population" <- "Race and Ethnicity, Total Population"
 townprofiledf$"Place of Birth, Total Population" <- "Place of Birth, Total Population"
 townprofiledf$"Households" <- "Households"
@@ -579,9 +579,9 @@ censuslink <- read.csv("TownProfilesCensus.csv", header=TRUE, nrows=170, strings
 profile <- merge(townprofiledf, censuslink)
 profile <- profile[c(31,1:30,32:170),]
 
-names(profile)[103:106] <- c("Social Characteristics", "Economic Characteristics", "Housing Characteristics", "Demographic Characteristics")
+names(profile)[104:107] <- c("Social Characteristics", "Economic Characteristics", "Housing Characteristics", "Demographic Characteristics")
 
-profiledf <- profile[,c(1,91,92,2:11,16:19,93,20:35,94,36:39,95,40:45,96,46:55,97,56:57,98,58:67,99,68:77,100,78:87,102,88:90,101,103:106)]
+profiledf <- profile[,c(1,103,91,92,2:11,16:19,93,20:35,94,36:39,95,40:45,96,46:55,97,56:57,98,58:67,99,68:77,100,78:87,102,88:90,101,103:106)]
 
 
 write.csv(profiledf, "5year2013_town_profile.csv", row.names=F)
